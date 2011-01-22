@@ -24,7 +24,7 @@ class WhosOnlineModule extends Gdn_Module {
 														 'Invisible' => $Invisible),
 														 array('UserID' => $Session->UserID));     
 
-		$Frequency = Gdn::Config('WhosOnline.Frequency', 4);
+		$Frequency = C('WhosOnline.Frequency', 4);
 		$History = time() - $Frequency;
 
 		$SQL
@@ -51,7 +51,7 @@ class WhosOnlineModule extends Gdn_Module {
 		ob_start();
 		?>
 			<div id="WhosOnline" class="Box">
-				<h4><?php echo Gdn::Translate("Who's Online"); ?> (<?php echo $this->_OnlineUsers->NumRows(); ?>)</h4>
+				<h4><?php echo T("Who's Online"); ?> (<?php echo $this->_OnlineUsers->NumRows(); ?>)</h4>
 				<ul class="PanelInfo">
 				<?php
 				if($this->_OnlineUsers->NumRows() > 0) { 
