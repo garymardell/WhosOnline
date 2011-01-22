@@ -35,7 +35,7 @@ class WhosOnlinePlugin extends Gdn_Plugin {
          $ConfigurationModel->Validation->ApplyRule('WhosOnline.Frequency', array('Required', 'Integer'));
          $ConfigurationModel->Validation->ApplyRule('WhosOnline.Location.Show', 'Required');
          if ($Sender->Form->Save() !== FALSE)
-            $Sender->StatusMessage = Gdn::Translate("Your settings have been saved.");
+            $Sender->StatusMessage = T("Your settings have been saved.");
       }
       
       // creates the page for the plugin options such as display options
@@ -56,13 +56,13 @@ class WhosOnlinePlugin extends Gdn_Plugin {
    }
    
    public function Base_Render_Before(&$Sender) {
-      $ConfigItem = Gdn::Config('WhosOnline.Location.Show', 'every');
+      $ConfigItem = C('WhosOnline.Location.Show', 'every');
       $Controller = $Sender->ControllerName;
       $Application = $Sender->ApplicationFolder;
       $Session = Gdn::Session();     
 
 		// Check if its visible to users
-		if (Gdn::Config('WhosOnline.Hide', TRUE) && !$Session->IsValid()) {
+		if (C('WhosOnline.Hide', TRUE) && !$Session->IsValid()) {
 			return;
 		}
 		
@@ -95,7 +95,7 @@ class WhosOnlinePlugin extends Gdn_Plugin {
 	   $Sender->AddModule($WhosOnlineModule);
 
 	   $Sender->AddJsFile('/plugins/WhosOnline/whosonline.js');
-	   $Frequency = Gdn::Config('WhosOnline.Frequency', 4);
+	   $Frequency = C('WhosOnline.Frequency', 4);
 	   if (!is_numeric($Frequency))
 	      $Frequency = 4;
       
