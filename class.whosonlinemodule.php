@@ -18,11 +18,13 @@ class WhosOnlineModule extends Gdn_Module {
 
 		$Invisible = ($Invisible ? 1 : 0);
 
-		if($Session->UserID)
-			$SQL->Replace('Whosonline', array('UserID' => $Session->UserID,
-														 'Timestamp' => Gdn_Format::ToDateTime(),
-														 'Invisible' => $Invisible),
-														 array('UserID' => $Session->UserID));     
+		if ($Session->UserID)
+			$SQL->Replace('Whosonline', array(
+				'UserID' => $Session->UserID,
+				'Timestamp' => Gdn_Format::ToDateTime(),
+				'Invisible' => $Invisible),
+				array('UserID' => $Session->UserID)
+			);     
 
 		$Frequency = C('WhosOnline.Frequency', 4);
 		$History = time() - $Frequency;
@@ -34,7 +36,7 @@ class WhosOnlineModule extends Gdn_Module {
 			->Where('w.Timestamp >=', date('Y-m-d H:i:s', $History))
 			->OrderBy('u.Name');
 
-		if(!$Session->CheckPermission('Plugins.WhosOnline.ViewHidden'))
+		if (!$Session->CheckPermission('Plugins.WhosOnline.ViewHidden'))
 			$SQL->Where('w.Invisible', 0);
 
 		$this->_OnlineUsers = $SQL->Get();
@@ -54,7 +56,7 @@ class WhosOnlineModule extends Gdn_Module {
 				<h4><?php echo T("Who's Online"); ?> (<?php echo $this->_OnlineUsers->NumRows(); ?>)</h4>
 				<ul class="PanelInfo">
 				<?php
-				if($this->_OnlineUsers->NumRows() > 0) { 
+				if ($this->_OnlineUsers->NumRows() > 0) { 
 					foreach($this->_OnlineUsers->Result() as $User) {
 				?>
 					<li>
