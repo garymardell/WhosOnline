@@ -8,8 +8,8 @@ $PluginInfo['WhosOnline'] = array(
    'Author' => "Gary Mardell",
    'AuthorEmail' => 'gary@vanillaplugins.com',
    'AuthorUrl' => 'http://vanillaplugins.com',
-   'RegisterPermissions' => array('Plugins.WhosOnline.ViewHidden'),
-   'SettingsPermission' => FALSE
+   'RegisterPermissions' => array('Plugins.WhosOnline.ViewHidden', 'Plugins.WhosOnline.Manage'),
+   'SettingsPermission' => array('Plugins.WhosOnline.Manage')
 );
 
 /**
@@ -21,6 +21,7 @@ $PluginInfo['WhosOnline'] = array(
 class WhosOnlinePlugin extends Gdn_Plugin {
    
    public function PluginController_WhosOnline_Create(&$Sender) {
+		$Sender->Permission('Plugins.WhosOnline.Manage');
       $Sender->AddSideMenu('plugin/whosonline');
       $Sender->Form = new Gdn_Form();
       $Validation = new Gdn_Validation();
