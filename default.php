@@ -4,7 +4,7 @@
 $PluginInfo['WhosOnline'] = array(
    'Name' => 'WhosOnline',
    'Description' => "Lists the users currently browsing the forum.",
-   'Version' => '1.2',
+   'Version' => '1.3',
    'Author' => "Gary Mardell",
    'AuthorEmail' => 'gary@vanillaplugins.com',
    'AuthorUrl' => 'http://vanillaplugins.com',
@@ -21,7 +21,7 @@ $PluginInfo['WhosOnline'] = array(
 class WhosOnlinePlugin extends Gdn_Plugin {
    
    public function PluginController_WhosOnline_Create(&$Sender) {
-		$Sender->Permission('Plugins.WhosOnline.Manage');
+      $Sender->Permission('Plugins.WhosOnline.Manage');
       $Sender->AddSideMenu('plugin/whosonline');
       $Sender->Form = new Gdn_Form();
       $Validation = new Gdn_Validation();
